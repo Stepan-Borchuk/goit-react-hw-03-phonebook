@@ -57,8 +57,22 @@ export class App extends Component {
     });
   };
 
+  componentDidUpdate(prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
+  componentDidMount() {
+    const contacts = JSON.parse(localStorage.getItem('contacts'));
+    if (contacts) {
+      this.setState({ contacts: contacts });
+    }
+  }
+
   render() {
     const normalizedFilter = this.state.filter.toLowerCase();
+
     const newContacts = this.state.contacts.filter(person =>
       person.name.toLowerCase().includes(normalizedFilter)
     );
@@ -73,7 +87,7 @@ export class App extends Component {
         backgroundColor="#1d2327"
       >
         <Container>
-          <Title>Phonebook</Title>
+          <Title> Phonebook </Title>
           <ContactForm submitForm={this.submitForm} />
           <Filter onFilter={this.onFilter} filter={this.state.filter} />
           <ContactList

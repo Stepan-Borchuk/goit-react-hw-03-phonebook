@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { ContactsItem, DeleteButton, Text } from './ContactsItem.styled';
+
 export const ContactListItem = ({ item, deleteContact }) => {
   return (
     <ContactsItem>
@@ -11,6 +12,7 @@ export const ContactListItem = ({ item, deleteContact }) => {
     </ContactsItem>
   );
 };
+
 ContactListItem.propTypes = {
   deleteContact: PropTypes.func,
   item: PropTypes.objectOf(PropTypes.string),
